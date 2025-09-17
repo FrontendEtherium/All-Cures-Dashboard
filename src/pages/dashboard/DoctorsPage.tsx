@@ -1,8 +1,7 @@
 import { DoctorsSection } from "@/components/dashboard/DoctorsSection";
-import { doctorDirectory } from "@/data/dashboard";
 
 export function DoctorsPage() {
-  return <DoctorsSection doctors={doctorDirectory} />;
+  return <DoctorsSection  />;
 }
 
 export default DoctorsPage;

@@ -1,64 +1,27 @@
-
-
 export type Appointment = {
-  id: string
-  patient: string
-  doctor: string
-  scheduledAt: string
-  type: "In-person" | "Virtual"
-  status: "Confirmed" | "Pending" | "Completed"
-}
+  id: string;
+  patient: string;
+  doctor: string;
+  scheduledAt: string;
+  type: "In-person" | "Virtual";
+  status: "Confirmed" | "Pending" | "Completed";
+};
 
 export type Transaction = {
-  id: string
-  reference: string
-  patient: string
-  amount: number
-  status: "Paid" | "Refunded" | "Pending"
-  method: "Card" | "UPI" | "Cash"
-  processedAt: string
-}
+  id: string;
+  reference: string;
+  patient: string;
+  amount: number;
+  status: "Paid" | "Refunded" | "Pending";
+  method: "Card" | "UPI" | "Cash";
+  processedAt: string;
+};
 
 export type RevenueSnapshot = {
-  month: string
-  revenue: number
-  change: number
-}
-
-export const doctorDirectory: Doctor[] = [
-  {
-    id: "doc-01",
-    name: "Dr. Julia Smith",
-    specialty: "Cardiology",
-    location: "New Delhi",
-    availability: "Mon - Thu",
-    patients: 128,
-  },
-  {
-    id: "doc-02",
-    name: "Dr. Aarav Mehta",
-    specialty: "Neurology",
-    location: "Mumbai",
-    availability: "Tue - Fri",
-    patients: 96,
-  },
-  {
-    id: "doc-03",
-    name: "Dr. Kavya Sharma",
-    specialty: "Dermatology",
-    location: "Bengaluru",
-    availability: "Wed - Sat",
-    patients: 142,
-  },
-  {
-    id: "doc-04",
-    name: "Dr. Vikas Patel",
-    specialty: "Orthopedics",
-    location: "Chennai",
-    availability: "Mon - Wed",
-    patients: 87,
-  },
-]
+  month: string;
+  revenue: number;
+  change: number;
+};
 
 export const upcomingAppointments: Appointment[] = [
   {
@@ -93,7 +56,7 @@ export const upcomingAppointments: Appointment[] = [
     type: "Virtual",
     status: "Pending",
   },
-]
+];
 
 export const recentTransactions: Transaction[] = [
   {
@@ -132,7 +95,7 @@ export const recentTransactions: Transaction[] = [
     method: "Cash",
     processedAt: "2025-01-29T17:05:00Z",
   },
-]
+];
 
 export const revenueHistory: RevenueSnapshot[] = [
   { month: "Sep", revenue: 540000, change: 8.4 },
@@ -140,11 +103,11 @@ export const revenueHistory: RevenueSnapshot[] = [
   { month: "Nov", revenue: 612500, change: 4.1 },
   { month: "Dec", revenue: 654200, change: 5.8 },
   { month: "Jan", revenue: 698400, change: 6.7 },
-]
+];
 
 export const dashboardHighlights = {
   totalPatients: 3124,
-  activeDoctors: doctorDirectory.length,
+
   monthlyRevenue: revenueHistory[revenueHistory.length - 1]?.revenue ?? 0,
   conversionRate: 42.3,
-}
+};

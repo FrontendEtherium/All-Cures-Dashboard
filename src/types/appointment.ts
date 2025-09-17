@@ -17,3 +17,7 @@ export interface AppointmentResponse {
   result: Appointment[];
   totalPages: number;
 }
+
+export interface AppointmentSummary {
+  totalAppointments: number;
+}
