@@ -1,12 +1,15 @@
-import { Stethoscope } from "lucide-react";
+import { useEffect, useState } from "react"
+import { Stethoscope } from "lucide-react"
 
+import { getAvailableDoctors } from "@/api/doctorApi"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -14,12 +17,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/table"
+import type { Doctor } from "@/types/doctor"
 
-import { useEffect, useState } from "react";
-import { getAvailableDoctors } from "@/api/doctorApi";
-import type { Doctor } from "@/types/doctor";
-import { Button } from "@/components/ui/button";
+import { DoctorDetailDialog } from "./DoctorDetailDialog"
 
 const MED_TYPE_MAP = {
   ayurveda: 1,
@@ -28,48 +29,59 @@ const MED_TYPE_MAP = {
   naturopathy: 9,
   unani: 2,
   chinese: 4,
-};
+} as const
 
 export function DoctorsSection() {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [medTypeID, setMedTypeID] = useState<number | undefined>(
-    undefined
-  );
+  const [doctors, setDoctors] = useState<Doctor[]>([])
+  const [totalPages, setTotalPages] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [medTypeID, setMedTypeID] = useState<number | undefined>(undefined)
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useEffect(() => {
-    const getDoctors = async () => {
-      const offset = (currentPage - 1) * 10;
-      const data = await getAvailableDoctors(offset, medTypeID);
-      setDoctors(data.data);
-      setTotalPages(data.totalPagesCount.totalPages);
-    };
-    getDoctors();
-  }, [currentPage, medTypeID]);
+    const fetchDoctors = async () => {
+      const offset = (currentPage - 1) * 10
+      const data = await getAvailableDoctors(offset, medTypeID)
+      setDoctors(data.data)
+      setTotalPages(data.totalPagesCount.totalPages)
+    }
+
+    void fetchDoctors()
+  }, [currentPage, medTypeID])
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+    setCurrentPage(page)
+  }
 
   const handleMedTypeChange = (medType: number | undefined) => {
-    setMedTypeID(medType);
-    setCurrentPage(1); // Reset to first page when filter changes
-  };
+    setMedTypeID(medType)
+    setCurrentPage(1)
+  }
+
+  const handleOpenDoctor = (doctor: Doctor) => {
+    setSelectedDoctor(doctor)
+    setIsDialogOpen(true)
+  }
+
+  const handleDialogChange = (open: boolean) => {
+    setIsDialogOpen(open)
+    if (!open) {
+      setSelectedDoctor(null)
+    }
+  }
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-xl">Doctors</CardTitle>
-          <CardDescription>
-            Track availability across the network.
-          </CardDescription>
+          <CardDescription>Track availability across the network.</CardDescription>
         </div>
         <Stethoscope className="size-6 text-primary" />
       </CardHeader>
       <CardContent className="overflow-x-auto">
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 flex flex-wrap gap-2">
           <Button
             variant={medTypeID === undefined ? "default" : "outline"}
             onClick={() => handleMedTypeChange(undefined)}
@@ -95,29 +107,35 @@ export function DoctorsSection() {
               <TableHead>Location</TableHead>
               <TableHead>Availability</TableHead>
               <TableHead className="text-right">Active patients</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {doctors.map((doctor) => (
               <TableRow key={doctor.docID}>
-                <TableCell className="font-medium">{`${doctor.prefix} ${
-                  doctor.firstName
-                } ${doctor.middleName || ""} ${doctor.lastName || ""}`}</TableCell>
-                <TableCell>{doctor.specialtyName}</TableCell>
-                <TableCell>{`${doctor.cityName}, ${doctor.addressState}`}</TableCell>
-                <TableCell>
-                  {doctor.docActive ? "Available" : "Unavailable"}
+                <TableCell className="font-medium">
+                  {[doctor.prefix, doctor.firstName, doctor.middleName, doctor.lastName]
+                    .filter((part) => Boolean(part && part.trim()))
+                    .join(" ")}
                 </TableCell>
-                <TableCell className="text-right">{"N/A"}</TableCell>
+                <TableCell>{doctor.specialtyName}</TableCell>
+                <TableCell>{`${doctor.cityName ?? ""}${doctor.addressState ? `, ${doctor.addressState}` : "-"}`}</TableCell>
+                <TableCell>{doctor.docActive ? "Available" : "Unavailable"}</TableCell>
+                <TableCell className="text-right">N/A</TableCell>
+                <TableCell className="text-right">
+                  <Button variant="outline" size="sm" onClick={() => handleOpenDoctor(doctor)}>
+                    View details
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-        <div className="flex justify-end items-center gap-2 mt-4">
+        <div className="mt-4 flex items-center justify-end gap-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handlePageChange(currentPage - 1)}
+            onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
             disabled={currentPage === 1}
           >
             Previous
@@ -128,13 +146,20 @@ export function DoctorsSection() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => handlePageChange(currentPage + 1)}
+            onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
             disabled={currentPage === totalPages}
           >
             Next
           </Button>
         </div>
       </CardContent>
+      <DoctorDetailDialog
+        doctor={selectedDoctor}
+        open={isDialogOpen}
+        onOpenChange={handleDialogChange}
+      />
     </Card>
-  );
+  )
 }
+
+export default DoctorsSection
