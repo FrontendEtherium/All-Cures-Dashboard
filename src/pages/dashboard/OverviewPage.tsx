@@ -23,7 +23,7 @@ import {
 import { getAppointmentsAnalytics } from "@/api/appointmentApi";
 import type { AppointmentAnalytics } from "@/types/appointment";
 import { AppointmentsSection } from "@/components/dashboard/AppointmentsSection";
-import { RevenueSection } from "@/components/dashboard/RevenueSection";
+
 import { TransactionsSection } from "@/components/dashboard/TransactionsSection";
 import { getDoctorsSummary } from "@/api/doctorApi";
 import type { DoctorsSummary } from "@/types/doctor";
@@ -37,9 +37,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  dashboardHighlights,
+
   recentTransactions,
-  revenueHistory,
+
 } from "@/data/dashboard";
 import { Button } from "@/components/ui/button";
 
