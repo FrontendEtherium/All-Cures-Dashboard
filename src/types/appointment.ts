@@ -21,3 +21,12 @@ export interface AppointmentResponse {
 export interface AppointmentSummary {
   totalAppointments: number;
 }
+
+export interface AppointmentAnalytics {
+  totalAppointments: number;
+  successAppointments: number;
+  failedAppointments: number;
+  upcomingAppointments: number;
+  paidAppointments: number;
+  freeAppointments: number;
+}

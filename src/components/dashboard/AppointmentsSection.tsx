@@ -154,14 +154,14 @@ export function AppointmentsSection() {
                     {error}
                   </TableCell>
                 </TableRow>
-              ) : appointments.length === 0 ? (
+              ) : appointments?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="h-24 text-center text-sm text-muted-foreground">
                     No appointments found for the selected date.
                   </TableCell>
                 </TableRow>
               ) : (
-                appointments.map((appointment) => {
+                appointments?.map((appointment) => {
                   const status = appointment.Status;
                   return (
                     <TableRow key={appointment.appointmentId}>

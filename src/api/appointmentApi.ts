@@ -1,6 +1,7 @@
 import type {
   AppointmentResponse,
   AppointmentSummary,
+  AppointmentAnalytics,
 } from "@/types/appointment";
 import api from "./axiosInstance";
 interface Params {
@@ -16,7 +17,7 @@ export const getAppointments = async ({
   docId,
 }: Params) => {
   const { data } = await api.get<AppointmentResponse>(
-    "/stats/appointments/success/list",
+    "/stats/appointments/list",
     {
       params: { startDate, status, offset, docId },
     }
@@ -51,5 +52,18 @@ export const getAppointmentsCount = async ({
       params: { startDate, endDate },
     }
   );
+  return data;
+};
+
+export const getAppointmentsAnalytics = async (params?: {
+  startDate?: string;
+  endDate?: string;
+}) => {
+  const query: Record<string, string> = {};
+  if (params?.startDate) query.startDate = params.startDate;
+  if (params?.endDate) query.endDate = params.endDate;
+  const { data } = await api.get<AppointmentAnalytics>("/stats/appointments", {
+    params: query,
+  });
   return data;
 };

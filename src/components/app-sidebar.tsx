@@ -62,9 +62,7 @@ export function AppSidebar({ items }: AppSidebarProps) {
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <div className="rounded-lg border bg-muted/30 p-3 text-xs text-muted-foreground">
-            Reach out to the ops team on Slack for support.
-          </div>
+        
         </SidebarFooter>
       </Sidebar>
     </>

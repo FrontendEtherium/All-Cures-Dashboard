@@ -50,3 +50,14 @@ export interface Doctor {
   hospitalID: number | null;
   awards: string | null;
 }
+
+export interface MedicineTypeCount {
+  medicineTypeName: string;
+  total: number;
+}
+
+export interface DoctorsSummary {
+  totalActiveDoctors: number;
+  totalSignedDoctors: number;
+  signedByMedicineType: MedicineTypeCount[];
+}
