@@ -11,7 +11,6 @@ export function formatDate(isoDate: string, locale: string = "en-IN") {
   return new Intl.DateTimeFormat(locale, {
     day: "2-digit",
     month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
+  
   }).format(date)
 }
