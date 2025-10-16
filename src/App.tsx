@@ -6,6 +6,7 @@ import { AppointmentsPage } from "@/pages/dashboard/AppointmentsPage"
 import { DoctorsPage } from "@/pages/dashboard/DoctorsPage"
 import { OverviewPage } from "@/pages/dashboard/OverviewPage"
 import { RevenuePage } from "@/pages/dashboard/RevenuePage"
+import { LiveMeetingsPage } from "@/pages/dashboard/LiveMeetingsPage"
 import { TransactionsPage } from "@/pages/dashboard/TransactionsPage"
 import { LoginPage } from "@/pages/LoginPage"
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="appointments" element={<AppointmentsPage />} />
               <Route path="transactions" element={<TransactionsPage />} />
               <Route path="revenue" element={<RevenuePage />} />
+              <Route path="live-meetings" element={<LiveMeetingsPage />} />
             </Route>
           </Route>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />

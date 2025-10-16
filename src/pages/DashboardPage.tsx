@@ -9,6 +9,7 @@ import {
   Receipt,
   Search,
   UserCircle2,
+  Video,
 } from "lucide-react";
 
 import { AppSidebar, type AppSidebarItem } from "@/components/app-sidebar";
@@ -50,6 +51,12 @@ const navItems: AppSidebarItem[] = [
     description: "Understand financial performance",
     href: "/dashboard/revenue",
     icon: BarChart3,
+  },
+  {
+    title: "Live Meetings",
+    description: "Track real-time meeting activity",
+    href: "/dashboard/live-meetings",
+    icon: Video,
   },
 ];
 
