@@ -157,7 +157,7 @@ export function LiveMeetingsSection() {
                 </TableRow>
               ) : (
                 events.map((event) => {
-                  const { date, time } = splitIsoDateTime(event.eventTime);
+                  const { date } = splitIsoDateTime(event.eventTime);
 
                   return (
                     <TableRow key={event.id}>
