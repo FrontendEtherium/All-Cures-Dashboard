@@ -95,11 +95,7 @@ export function LoginPage() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter>
-          <p className="text-sm text-muted-foreground">
-            Use any email and password for now. We will connect real auth later.
-          </p>
-        </CardFooter>
+     
       </Card>
     </div>
   );
