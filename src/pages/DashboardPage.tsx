@@ -40,18 +40,18 @@ const navItems: AppSidebarItem[] = [
     href: "/dashboard/appointments",
     icon: CalendarCheck,
   },
-  {
-    title: "Transactions",
-    description: "Track recent invoice activity",
-    href: "/dashboard/transactions",
-    icon: Receipt,
-  },
-  {
-    title: "Revenue",
-    description: "Understand financial performance",
-    href: "/dashboard/revenue",
-    icon: BarChart3,
-  },
+  // {
+  //   title: "Transactions",
+  //   description: "Track recent invoice activity",
+  //   href: "/dashboard/transactions",
+  //   icon: Receipt,
+  // },
+  // {
+  //   title: "Revenue",
+  //   description: "Understand financial performance",
+  //   href: "/dashboard/revenue",
+  //   icon: BarChart3,
+  // },
   {
     title: "Live Meetings",
     description: "Track real-time meeting activity",
@@ -93,13 +93,13 @@ export function DashboardLayout() {
               </div>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="relative">
+              {/* <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   className="pl-9 sm:w-64"
                   placeholder="Search records..."
                 />
-              </div>
+              </div> */}
               <Button variant="outline" onClick={logout} className="sm:w-auto">
                 <LogOut className="size-4" />
                 Sign out

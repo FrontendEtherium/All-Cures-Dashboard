@@ -602,7 +602,7 @@ export function OverviewPage() {
       /> */}
       <div className="grid gap-3 lg:grid-cols-2">
         <AppointmentsSection />
-        <TransactionsSection transactions={recentTransactions} />
+        {/* <TransactionsSection transactions={recentTransactions} /> */}
       </div>
     </div>
   );
