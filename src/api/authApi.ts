@@ -1,7 +1,7 @@
 import axios from "axios";
 import { type LoginCredentials } from "@/contexts/auth";
 
-const AUTH_URL = "https://uat.all-cures.com:444/cures/dashboard/login";
+const AUTH_URL = "https://all-cures.com:444/cures/dashboard/login";
 
 export const loginUser = async (credentials: LoginCredentials) => {
   try {
