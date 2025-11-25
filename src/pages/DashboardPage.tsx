@@ -1,13 +1,12 @@
 import { useMemo } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import {
-  BarChart3,
+
   CalendarCheck,
   Home,
   LogOut,
   Menu,
-  Receipt,
-  Search,
+ 
   UserCircle2,
   Video,
 } from "lucide-react";
@@ -16,7 +15,7 @@ import { AppSidebar, type AppSidebarItem } from "@/components/app-sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
-import { Input } from "@/components/ui/input";
+
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import { useAuth } from "@/contexts/auth";
